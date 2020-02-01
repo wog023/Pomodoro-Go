@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Pomodoro Go</title>
+
+	<link rel="stylesheet" href="pomodoro.css">
+	<link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
+</head>
+<body>
+
+	<header>
+		<h2>Pomodoro Go</h2>
+	</header>
+	<div id="content">
+
+		
+		<div id="clock">
+			<h1 id="timeShow">25：00</h1>
+		</div>
+		<div id="btns">
+			<h2 class="btn" id="start" onclick="myTime()">START</h2>
+	    	<h2 class="btn" id="stop"  >STOP</h2>
+	    	<h2 class="btn" id="min25" onclick="min25()">25min</h2>
+			<h2 class="btn" id="min5" onclick="min5()">5min</h2>
+		</div>
+
+		<audio src="ring.mp3" id="audio"></audio>
+		
+			
+		
+
+
+	   
+
+
+
+
+		
+
+
+
+	</div>
+	<footer>
+			
+		</footer>
+	
+
+
+
+
+
+	
+
+
+
+
+	<script>
+
+
+
+	var time = 60*25
+
+	function ring(){		//鬧鐘響
+		var ring1 = document.getElementById('audio')
+		ring1.play()
+	}
+	function ringStop(){	//鬧鐘停止
+		var ring1 = document.getElementById('audio')
+		ring1.pause()
+	}
+	var getStop = document.getElementById('stop')
+	var getMin5 = document.getElementById('min5')
+	var getMin25 = document.getElementById('min25')
+	var getTimeShow = document.getElementById('timeShow')
+
+
+
+
+
+
+
+
+
+	function myTime(){
+
+
+
+		if(time<=0){		//倒數結束
+			// alert('結束')
+			ring()
+		}else{				//倒數進行
+			time = time-1
+			var min = parseInt(time/60)
+			var sec = time%60
+
+			if(min<10 && min>=1){
+				min = '0'+min
+			}else if(min<1){
+				min = '00'
+			}
+
+			if(sec<10 && sec>=1){
+				sec = '0'+sec
+			}else if(sec<1){
+				sec = '00'
+			}
+
+			console.log(min+'分'+sec+'秒')
+			getTimeShow.innerHTML = min+'：'+sec		
+		}
+
+
+
+		var timeRun = setTimeout(myTime,1000)
+
+		getStop.onclick = function stopmyTime(){	//按下stop
+			clearTimeout(timeRun)
+			ringStop() 
+			
+		}
+		getMin5.onclick = function(){			//按下5min
+			clearTimeout(timeRun)
+			time = 60*5
+			getTimeShow.innerHTML = '05：00'
+			ringStop()
+		}	
+		getMin25.onclick = function(){			//按下25min
+			clearTimeout(timeRun)
+			time = 60*25
+			getTimeShow.innerHTML = '25：00'
+			ringStop()
+		}
+	}
+
+
+
+
+
+
+
+
+	// var count = 0
+	// document.getElementById('start').onclick = function(){
+		
+	// 	if(count > 0){
+	// 		return false
+	// 	}else{
+	// 		count = count +1	
+	// 		myTime(count)
+	// 		console.log(count)
+	// 		if(count>0){
+	// 			document.getElementById('stop').onclick = function(){
+	// 				count = count-1
+	// 				console.log(count)
+	// 			}
+	// 		}
+	// 	}
+	// }
+
+
+
+
+	// document.getElementById('stop').onclick = function(){
+		
+	// 	if(count > 0){
+	// 		return false
+	// 	}else{
+	// 		count = count-1	
+	// 		// myTime(count)
+	// 		// console.log(count)
+	// 	}
+	// }
+
+
+
+		
+
+
+
+
+
+
+	</script>
+	
+
+
+
+
+
+
+
+
+</body>
+</html>
