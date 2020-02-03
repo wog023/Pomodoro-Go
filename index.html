@@ -10,7 +10,7 @@
 <body>
 
 	<header>
-		<h2>Pomodoro Go</h2>
+		<a href="#"><h2>Pomodoro Go</h2></a>
 	</header>
 	<div id="content">
 
@@ -20,6 +20,7 @@
 		</div>
 		<div id="btns">
 			<h2 class="btn" id="start" onclick="myTime()">START</h2>
+			<h2 class="btn" id="start2" >START</h2>
 	    	<h2 class="btn" id="stop"  >STOP</h2>
 	    	<h2 class="btn" id="min25" onclick="min25()">25min</h2>
 			<h2 class="btn" id="min5" onclick="min5()">5min</h2>
@@ -73,23 +74,29 @@
 	var getMin5 = document.getElementById('min5')
 	var getMin25 = document.getElementById('min25')
 	var getTimeShow = document.getElementById('timeShow')
+	function startOn(){
+		document.getElementById('start').style.visibility='visible'
+	}
 
 
 
 
 
-
-
+	getMin5.onclick = function(){			//按下5min
+		time = 60*5
+		getTimeShow.innerHTML = '05：00'
+	}
 
 
 	function myTime(){
 
-
+		document.getElementById('start').style.visibility='hidden'	//start關閉
 
 		if(time<=0){		//倒數結束
 			// alert('結束')
 			ring()
 		}else{				//倒數進行
+			
 			time = time-1
 			var min = parseInt(time/60)
 			var sec = time%60
@@ -110,26 +117,26 @@
 			getTimeShow.innerHTML = min+'：'+sec		
 		}
 
-
-
 		var timeRun = setTimeout(myTime,1000)
 
 		getStop.onclick = function stopmyTime(){	//按下stop
 			clearTimeout(timeRun)
 			ringStop() 
-			
+			startOn()
 		}
 		getMin5.onclick = function(){			//按下5min
 			clearTimeout(timeRun)
 			time = 60*5
 			getTimeShow.innerHTML = '05：00'
 			ringStop()
+			startOn()
 		}	
 		getMin25.onclick = function(){			//按下25min
 			clearTimeout(timeRun)
 			time = 60*25
 			getTimeShow.innerHTML = '25：00'
 			ringStop()
+			startOn()
 		}
 	}
 
